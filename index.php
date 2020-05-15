@@ -44,9 +44,9 @@ if(!isset($_COOKIE["logged_in"])){
 if(isset($_POST["submit"])){
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
-        if(!empty($_POST["naam"]) && !empty($_POST["issue"])  {
+        if(!empty($_POST["naam"]) && !empty($_POST["issue"]) ) {
             $stmt = $pdo->prepare(
-                "INSERT INTO post (naam, issue, image_link)
+                "INSERT INTO post (naam, issue,)
                 VALUES ('".$_POST["naam"]."', '".$_POST["issue"]."')"
             );
             $stmt->execute();
