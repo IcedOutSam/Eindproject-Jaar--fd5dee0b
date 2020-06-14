@@ -1,10 +1,10 @@
 {
-  "name": "skil-bot",
+  "name": "skilbot",
   "version": "1.0.0",
   "description": "Queueing bot for the coaches and the students",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/IcedOutSam/Eindproject-Jaar--fd5dee0b#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "slackbots": "^1.2.0"
   }
 }
