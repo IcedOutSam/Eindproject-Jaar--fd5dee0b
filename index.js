@@ -19,7 +19,7 @@ var studentsArray = [];
 
 // create a bot
 var bot = new SlackBot({
-    token: 'xoxb-369216512676-1162931326837-46eFDYwxQglf9iPiVjrEGwDz', // Add a bot https://my.slack.com/services/new/bot and put the token
+    token: 'xoxb-369216512676-1162931326837-gsnSfdrHYCDGFtGnFoO4ZMym', // Add a bot https://my.slack.com/services/new/bot and put the token
     name: 'skilbot'
 });
 
@@ -36,7 +36,7 @@ bot.on('start', () => {
     function handleMessage(message) {
         if(message.includes('greet')) {
             inspireMe()
-        } else if(message.includes('STUDENTS')) {
+        } else if(message.includes('students')) {
           students();
         } else if(message.includes('help')) {
             runHelp()
@@ -50,13 +50,16 @@ bot.on('start', () => {
 
     //functions
     function students() {
-      var STUDENTS = connection.query("SELECT naamStudent FROM STUDENTS", function STUDENTS (err, result) {
+
+      var STUDENTS = connection.query("SELECT * FROM ISSUES ", function STUDENTS (err, result) {
         if (err) throw err;
         studentsArray.push(result);
+        for (var i = 0; i < result.length; i++) {
         bot.postMessageToChannel(
             'skilbot_test_channel',
-            result
+            result[i]
           );
+        }
       });
     }
     // Message Handler
