@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host: "skil1.mysql.database.azure.com",
   database: 'skil',
   user:  "izdine@skil1",
-  password: 'IKLS+1234'
+  password: '*********'
 });
 
 
