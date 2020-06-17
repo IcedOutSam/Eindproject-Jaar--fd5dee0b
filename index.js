@@ -19,7 +19,7 @@ var studentsArray = [];
 
 // create a bot
 var bot = new SlackBot({
-    token: 'xoxb-369216512676-1162931326837-gsnSfdrHYCDGFtGnFoO4ZMym', // Add a bot https://my.slack.com/services/new/bot and put the token
+    token: '*****************************', // Add a bot https://my.slack.com/services/new/bot and put the token
     name: 'skilbot'
 });
 
