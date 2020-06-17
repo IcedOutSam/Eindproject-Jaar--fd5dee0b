@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host: "skil1.mysql.database.azure.com",
   database: 'skil',
   user:  "izdine@skil1",
-  password: '*********'
+  password: 'IKLS+1234'
 });
 
 
@@ -19,7 +19,7 @@ var studentsArray = [];
 
 // create a bot
 var bot = new SlackBot({
-    token: '*****************************', // Add a bot https://my.slack.com/services/new/bot and put the token
+    token: 'xoxb-369216512676-1162931326837-OkyndgX8ZO8soYKLoQfkRJJj', // Add a bot https://my.slack.com/services/new/bot and put the token
     name: 'skilbot'
 });
 
@@ -35,11 +35,11 @@ bot.on('start', () => {
     });
     function handleMessage(message) {
         if(message.includes('greet')) {
-            inspireMe()
+            // inspireMe()
         } else if(message.includes('students')) {
-          students();
+          issuesTies();
         } else if(message.includes('help')) {
-            runHelp()
+            // runHelp()
         }
     };
 
@@ -49,19 +49,26 @@ bot.on('start', () => {
 
 
     //functions
-    function students() {
+    function issuesTies() {
+      connection.query("SELECT idIssue FROM coachIssue WHERE idCoach=1", function STUDENTS (err, resultTies) {
+        for (var i = 0; i < resultTies.length; i++) {
+          console.log(resultTies[i].idIssue);
+          var ID = resultTies[i].idIssue;
+          console.log(ID);
 
-      var STUDENTS = connection.query("SELECT * FROM ISSUES ", function STUDENTS (err, result) {
+      connection.query("SELECT * FROM ISSUES WHERE ID="+ID, function STUDENTS (err, resultIssue) {
         if (err) throw err;
-        studentsArray.push(result);
-        for (var i = 0; i < result.length; i++) {
+        // studentsArray.push(result);
+        for (var i = 0; i < resultIssue.length; i++) {
         bot.postMessageToChannel(
             'skilbot_test_channel',
-            result[i]
+            resultIssue[i]
           );
         }
       });
-    }
+     }
+    });
+   }
     // Message Handler
     bot.on('message', data => {
       if (data.type !== 'message') {
