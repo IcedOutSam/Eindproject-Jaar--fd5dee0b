@@ -18,7 +18,7 @@
     var SlackBot = require('slackbots');
     var studentsArray = [];
 
-    // create a bot
+    // Create a bot
         var bot = new SlackBot({
         token: process.env.SLACK_TOKEN, // Add a bot https://my.slack.com/services/new/bot and put the token
         name: 'skilbot'
@@ -26,7 +26,6 @@
 
         bot.on('start', () => {
         const params = {
-            icon_emoji: ':robot:'
         };
         bot.postMessageToChannel(
             'skilbot_test_channel',
@@ -36,11 +35,9 @@
         });
         function handleMessage(message) {
             if(message.includes('greet')) {
-                // inspireMe()
             } else if(message.includes('students')) {
             issuesTies();
             } else if(message.includes('help')) {
-                // runHelp()
             }
         };
 
