@@ -1,7 +1,11 @@
+//Required    
     const SlackBot = require('slackbots');
     const dotenv = require('dotenv');
     const mysql = require('mysql');
+    require('dotenv').config()
+    const token = process.env.SLACK_TOKEN;
 
+//Database Connection
     var connection = mysql.createConnection({
     host: "skil1.mysql.database.azure.com",
     database: 'skil',
@@ -9,43 +13,41 @@
     password: process.env.DB_PASS
     });
 
-
     connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
     });
 
-    var SlackBot = require('slackbots');
-    var studentsArray = [];
 
-    // Create a bot
+// SKILbot 
         var bot = new SlackBot({
         token: process.env.SLACK_TOKEN, // Add a bot https://my.slack.com/services/new/bot and put the token
-        name: 'skilbot'
+        name: 'SKILbot'
         });
 
-        bot.on('start', () => {
-        const params = {
-        };
-        bot.postMessageToChannel(
-            'skilbot_test_channel',
-            'SKILbot tot je beschikking',
-            params
-        );
+
+// Start Handler
+    bot.on('start', () => {
+    bot.postMessageToChannel('skilbot_test_channel', 'SKILbot tot je beschikking', params);
         });
-        function handleMessage(message) {
-            if(message.includes('greet')) {
-            } else if(message.includes('students')) {
-            issuesTies();
-            } else if(message.includes('help')) {
-            }
-        };
 
-        // Error Handler
-        bot.on('error', err => console.log(err));
+        
+// Commands
+    function handleMessage(message) {
+        if(message.includes('greet')) {
+        } else if(message.includes('students')) {
+        issuesTies();
+        } else if(message.includes('help')) {
+        }
+    };
 
-        //Functions
-        function issuesTies() {
+
+// Error Handler
+    bot.on('error', err => console.log(err));
+
+
+// Database Functions 
+    function issuesTies() {
         connection.query("SELECT idIssue FROM coachIssue WHERE idCoach=1", function STUDENTS (err, resultTies) {
             for (var i = 0; i < resultTies.length; i++) {
             console.log(resultTies[i].idIssue);
@@ -64,17 +66,20 @@
         });
         }
         });
-        }
+    }
+   
     
-        // Message Handler
-        bot.on('message', data => {
+// Message Handler
+    bot.on('message', data => {
         if (data.type !== 'message') {
             return;
         }
 
-        handleMessage(data.text);
-        });
+    handleMessage(data.text);
+    });
 
+
+//Code for the block message that I keep in here because I still do not know how to use it, lez go     
     // Attachment Preview Message
     // {
     // 	"attachments": [
